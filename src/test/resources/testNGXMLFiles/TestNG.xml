@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <!--suite name="All Test Suite" parallel="methods" thread-count="3"-->
-<suite name="All Test Suite" >
+	<suite name="All Test Suite" >
 	<listeners>
 		<listener class-name="com.orangehrm.listeners.TestListener" />
 	</listeners>
-	<test name="SeleniumFramework Test" >
+	<test name="SeleniumFramework Test">
 		<classes>
-			
+
 			<class name="com.orangehrm.testcases.DashBoardTest" />
 			<class name="com.orangehrm.testcases.LoginTest" />
 			<class name="com.orangehrm.testcases.DemoTest" />
-			
+
 
 		</classes>
 	</test>

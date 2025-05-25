@@ -3,6 +3,7 @@ package com.orangehrm.driveractions;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,7 +27,7 @@ public class DriverActions extends BaseClass {
 		this.driver = driver;
 		EXPLICIT_WAIT_TIME = Integer.parseInt(prop.getProperty("ExplicitWaitTime"));
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT_TIME));
-		logger.info("Driver initialized");
+		logger.info("WebDriver instance is created.");
 	}
 
 	// Return Page Title
@@ -53,8 +54,8 @@ public class DriverActions extends BaseClass {
 			waitUntilDisplayed(webElement);
 			webElement.clear();
 			webElement.sendKeys(value);
-			logger.info("'" + value + "'" + " - entered in the textBox - " + getElementDescription(webElement));
-			ExtentReportsManager.logStep("'" + value + "'" + " - entered in the textBox - " + getElementDescription(webElement));
+			logger.info("Entered text on " + getElementDescription(webElement) + "-->" + value);
+			ExtentReportsManager.logStep("Entered text on " + getElementDescription(webElement) + "-->" + value);
 		} catch (Exception e) {
 			logger.error("Unable to set Textbox " + e.getMessage());
 			applyBoarder(webElement, "red");
@@ -119,7 +120,8 @@ public class DriverActions extends BaseClass {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView(true)", element);
-			ExtentReportsManager.logStep("Scrolled into the element");
+			ExtentReportsManager.logStep("Scrolled into the element: "+getElementDescription(element));
+			logger.info("Scrolled into the element: "+getElementDescription(element));
 		} catch (Exception e) {
 			logger.error("Unable to scroll into the element " + e.getMessage());
 		}
@@ -248,6 +250,24 @@ public class DriverActions extends BaseClass {
 		}
 	}
 
+	// Switch to Window
+		public void switchToWindow(String window) {
+			
+			try {
+				Set<String> windowHandles = driver.getWindowHandles();
+				for(String windowHandle:windowHandles) {
+					if(windowHandle.equalsIgnoreCase(window)) {
+						driver.switchTo().window(window);
+						logger.info("Switched to window:" + driver.getTitle());
+						return;
+					}
+				}
+				logger.info("Window with title " + window + " not found.");
+				
+			} catch (Exception e) {
+				logger.error("Unable to switch to window:" + window);
+			}
+		}
 	// Switch to frame
 	public void switchToFrame(WebElement frameElement) {
 		try {

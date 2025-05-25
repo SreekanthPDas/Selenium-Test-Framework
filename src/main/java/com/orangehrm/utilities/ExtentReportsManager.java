@@ -27,7 +27,7 @@ public class ExtentReportsManager {
 	private static Map<Long, WebDriver> driverMap = new HashMap<>();
 	public static final Logger logger = BaseClass.logger;
 	// Initialize Extent Report
-	public static ExtentReports getReporter() {
+	public synchronized static ExtentReports getReporter() {
 
 		if (extentReports == null) {
 			String reportPath = System.getProperty("user.dir") + "/src/test/resources/ExtentReports/ExtentReport.html";
@@ -47,7 +47,7 @@ public class ExtentReportsManager {
 	}
 	
 	//Register driver
-	public static void registerDriver(WebDriver driver) {
+	public synchronized static void registerDriver(WebDriver driver) {
 		driverMap.put(Thread.currentThread().getId(), driver);
 		logger.info("Driver registered as: Thread ID: " +Thread.currentThread().getId()+" driver:"+driver.toString());
 	}
@@ -59,14 +59,14 @@ public class ExtentReportsManager {
 		return extentTest;
 	}
 
-	// Start Test
-	public static void endTest() {
+	// End Test
+	public synchronized static void endTest() {
 		getReporter().flush();
 		logger.info("Extent reports flushed");
 	}
 
 	// Get current thread's Test
-	public static ExtentTest getTest() {
+	public synchronized static ExtentTest getTest() {
 		return test.get();
 	}
 
@@ -109,7 +109,7 @@ public class ExtentReportsManager {
 	}
 	
 	//Take Screenshot with Date and time in fileName
-	public static String takeScreenshot(WebDriver driver, String fileName) {
+	public synchronized static String takeScreenshot(WebDriver driver, String fileName) {
 		TakesScreenshot ts = (TakesScreenshot)driver;
 		File src = ts.getScreenshotAs(OutputType.FILE);
 		//Format Date time

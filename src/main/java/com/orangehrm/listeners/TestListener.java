@@ -17,7 +17,7 @@ import com.orangehrm.utilities.RetryAnalyzer;
 
 public class TestListener implements ITestListener, IAnnotationTransformer{
 	public static final Logger logger = BaseClass.logger;
-	private static String testName;
+	private String testName;
 	private ExtentReportsManager extentManager;
 	@Override
 	public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
@@ -41,12 +41,13 @@ public class TestListener implements ITestListener, IAnnotationTransformer{
 	public void onTestSuccess(ITestResult result) {
 		// TODO Auto-generated method stub
 		//ExtentReportsManager.logStepWithScreenshot(BaseClass.getDriver(),"Test Passed Successfully!","Test End: "+ testName + " - ✔ Test Passed");
-
+		testName = result.getMethod().getMethodName();
 		ExtentReportsManager.logStepWithScreenshot(BaseClass.getDriver(),"Test Passed Successfully!","Test End: "+ testName + " - ✔ Test Passed");logger.info("Test End: "+ testName + " - ✔ Test Passed");
 	}
 	//Triggered when a Test is failed
 	@Override
 	public void onTestFailure(ITestResult result) {
+		testName = result.getMethod().getMethodName();
 		// LOg failure including screenshots
 		String failureMessage = result.getThrowable().getMessage();
 		//ExtentReportsManager.logStep(failureMessage);
@@ -58,6 +59,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer{
 	//Triggered when a Test is Skipped
 	@Override
 	public void onTestSkipped(ITestResult result) {
+		testName = result.getMethod().getMethodName();
 		// Log Test Skipped 
 		//ExtentReportsManager.logSkip("Test Skipped: " + testName);
 		ExtentReportsManager.logSkip("Test Skipped: " + testName);

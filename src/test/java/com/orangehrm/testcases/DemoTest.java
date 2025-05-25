@@ -10,6 +10,7 @@ public class DemoTest extends BaseClass{
 	
 	@Test
 	public void testDemoTest() {
+		logger.info("Testing title of the page");
 		ExtentReportsManager.logStep("Testing DemoPage Title");
 		staticWait(25);
 		String title = getDriver().getTitle();

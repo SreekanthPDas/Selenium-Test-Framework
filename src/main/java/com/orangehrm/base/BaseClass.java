@@ -28,10 +28,10 @@ public class BaseClass {
 	
 	public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	public static ThreadLocal<DriverActions> driverActions = new ThreadLocal<>();
-	public static final Logger logger = LoggerManager.getLoggers();
+	public static final Logger logger = LoggerManager.getLoggers(BaseClass.class);
 	
 	@BeforeSuite
-	public synchronized void loadConfigFile() {
+	public void loadConfigFile() {
 		// Load properties file
 		try {
 			FileInputStream fis = new FileInputStream("src//main//resources//config.properties");
@@ -46,7 +46,7 @@ public class BaseClass {
 		//ExtentReportsManager.getReporter();
 	}
 
-	public void launchBrowser() {
+	public synchronized void launchBrowser() {
 		
 		String browser = prop.getProperty("browser");
 		
@@ -94,7 +94,7 @@ public class BaseClass {
 		}
 	}
 	
-	public static DriverActions getDriverActions(WebDriver driver) {
+	public synchronized static DriverActions getDriverActions(WebDriver driver) {
 		if(driverActions.get() == null) {
 			System.out.println("Action driver is not initialized");
 			throw new IllegalStateException();
@@ -102,7 +102,7 @@ public class BaseClass {
 		return driverActions.get();
 	}
 	
-	public static WebDriver getDriver() {
+	public synchronized static WebDriver getDriver() {
 		if(driver.get() == null) {
 			logger.error("Web driver is not initialized");
 			throw new IllegalStateException();
@@ -112,6 +112,7 @@ public class BaseClass {
 
 	@BeforeMethod
 	public synchronized void setUp() {
+		logger.info("Setting up WebDriver for: " + this.getClass().getSimpleName());
 		launchBrowser();
 		configureBrowser();
 		staticWait(2);
