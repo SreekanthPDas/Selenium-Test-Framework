@@ -29,6 +29,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer{
 	public void onTestStart(ITestResult result) {
 		// 
 		testName = result.getMethod().getMethodName();
+		logger.info("onTestStart: "+testName);
 		//Start loggining in Extent Report
 		//ExtentReportsManager.startTest(testName);
 		ExtentReportsManager.startTest(testName);
