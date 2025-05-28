@@ -84,7 +84,7 @@ public class BaseClass {
 		// Navigate to URL
 		try {
 			getDriver().get(url);
-			driverActions.get().waitForPageLoadComplete(30);
+			//driverActions.get().waitForPageLoadComplete(30);
 			// Page Load timeout defined
 			getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Integer.parseInt(prop.getProperty("TimeOutTime"))));
 			
@@ -124,7 +124,7 @@ public class BaseClass {
 		
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public synchronized void tearDown() {
 		if (driver != null) {
 			try {

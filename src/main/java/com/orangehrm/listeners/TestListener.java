@@ -70,6 +70,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer{
 	//Triggered when a Suite is started
 	@Override
 	public void onStart(ITestContext context) {
+		
 		// Initialize the Extent Reporter
 		ExtentReportsManager.getReporter();
 		extentManager= new ExtentReportsManager();
@@ -82,6 +83,7 @@ public class TestListener implements ITestListener, IAnnotationTransformer{
 		//ExtentReportsManager.endTest();
 		ExtentReportsManager.endTest();
 		logger.info("Test suite run has completed");
+		logger.info("==================================================================================");
 	}
 	
 

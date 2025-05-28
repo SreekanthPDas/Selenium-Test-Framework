@@ -18,12 +18,12 @@ public class DashBoardTest extends BaseClass{
 	public void setUpPages() {
 		loginPage = new LoginPage(getDriver());
 		dashBoardPage = new DashboardPage(getDriver());
-		loginPage.login("admin","admin123");
-		
+			
 	}
 	@Test
 	public void verifyHeaderTest() {
 		ExtentReportsManager.logStep("Testing Dashboard page header");
+		loginPage.login("admin","admin123");
 		String headerActual = dashBoardPage.getDashboardHeader();
 		Assert.assertEquals(headerActual,"Dashboard","Actual header doesnt match the expected header");
 	}
@@ -31,6 +31,7 @@ public class DashBoardTest extends BaseClass{
 	@Test
 	public void verifyUserTest() {
 		ExtentReportsManager.logStep("Testing logged in suername");
+		loginPage.login("admin","admin123");
 		String userActual = dashBoardPage.getLoggedinUsername();
 		Assert.assertEquals(userActual,"Test User","Actual user doesnt match the expected user");
 	}

@@ -54,13 +54,12 @@ public class DriverActions extends BaseClass {
 			waitUntilDisplayed(webElement);
 			webElement.clear();
 			webElement.sendKeys(value);
-			logger.info("Entered text on " + getElementDescription(webElement) + "-->" + value);
-			ExtentReportsManager.logStep("Entered text on " + getElementDescription(webElement) + "-->" + value);
+			logger.info("Entered text on " + getElementDescription(webElement) + " Value -->" + value);
+			ExtentReportsManager.logStep("Entered text on " + getElementDescription(webElement) + " Value -->" + value);
 		} catch (Exception e) {
-			logger.error("Unable to set Textbox " + e.getMessage());
+			logger.error("Unable to enter text on " + getElementDescription(webElement) +"--> Error: "+ e.getMessage());
 			applyBoarder(webElement, "red");
-			logger.info("Unable to set Textbox " + getElementDescription(webElement));
-			ExtentReportsManager.logStep("Unable to set Textbox " + getElementDescription(webElement));
+			ExtentReportsManager.logStep("Unable to enter text on " + getElementDescription(webElement));
 		}
 	}
 
@@ -135,7 +134,7 @@ public class DriverActions extends BaseClass {
 					.equals("complete"));
 		} catch (Exception e) {
 			logger.error("Page timed out before loading " + e.getMessage());
-			ExtentReportsManager.logFailure(driver, "Page timedOut before loading", "Page timedOut before loading");
+			
 		}
 	}
 

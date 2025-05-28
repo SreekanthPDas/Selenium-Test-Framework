@@ -56,6 +56,7 @@ public class ExtentReportsManager {
 	public synchronized static ExtentTest startTest(String testName) {
 		ExtentTest extentTest = getReporter().createTest(testName);
 		test.set(extentTest);
+		logger.info("Thread Local created for: "+testName);
 		return extentTest;
 	}
 
