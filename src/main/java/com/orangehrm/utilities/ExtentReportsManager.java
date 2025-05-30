@@ -28,7 +28,7 @@ public class ExtentReportsManager {
 	public static final Logger logger = BaseClass.logger;
 	// Initialize Extent Report
 	public synchronized static ExtentReports getReporter() {
-
+		logger.info("Starting Extent Reports Set Up");
 		if (extentReports == null) {
 			String reportPath = System.getProperty("user.dir") + "/src/test/resources/ExtentReports/ExtentReport.html";
 			ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);

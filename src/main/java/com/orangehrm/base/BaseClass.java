@@ -53,17 +53,17 @@ public class BaseClass {
 		if (browser.equalsIgnoreCase("Chrome")) {
 			//driver = new ChromeDriver();
 			driver.set(new ChromeDriver());
-			logger.info("Chrome driver initiaized");
+			logger.info("Chrome driver initialized");
 			ExtentReportsManager.registerDriver(getDriver());
 		} else if (browser.equalsIgnoreCase("FireFox")) {
 			//driver = new FirefoxDriver();
 			driver.set(new FirefoxDriver());
-			logger.info("Firefox driver initiaized");
+			logger.info("Firefox driver initialized");
 			ExtentReportsManager.registerDriver(getDriver());
 		} else if (browser.equalsIgnoreCase("Edge")) {
 			//driver = new EdgeDriver();
 			driver.set(new EdgeDriver());
-			logger.info("Edge driver initiaized");
+			logger.info("Edge driver initialized");
 			ExtentReportsManager.registerDriver(getDriver());
 		} else {
 			throw new IllegalArgumentException("Browser is not supported: " + browser);

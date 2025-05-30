@@ -7,10 +7,10 @@
 	</listeners>
 	<test name="SeleniumFramework Test">
 		<classes>
-
+			<class name="com.orangehrm.testcases.DemoTest" />
 			<class name="com.orangehrm.testcases.DashBoardTest" />
-			<!--class name="com.orangehrm.testcases.LoginTest" />
-			<class name="com.orangehrm.testcases.DemoTest" /-->
+			<class name="com.orangehrm.testcases.LoginTest" />
+			
 
 
 		</classes>

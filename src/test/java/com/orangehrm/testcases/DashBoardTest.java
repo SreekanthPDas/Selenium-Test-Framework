@@ -22,13 +22,16 @@ public class DashBoardTest extends BaseClass{
 	}
 	@Test
 	public void verifyHeaderTest() {
-		ExtentReportsManager.logStep("Testing Dashboard page header");
+		logger.info("Testing Dashboard page header");
+		
 		loginPage.login("admin","admin123");
 		String headerActual = dashBoardPage.getDashboardHeader();
+		logger.info("Header is: " + headerActual);
+		//ExtentReportsManager.logStep("Header is: " + headerActual);
 		Assert.assertEquals(headerActual,"Dashboard","Actual header doesnt match the expected header");
 	}
 	
-	@Test
+	
 	public void verifyUserTest() {
 		ExtentReportsManager.logStep("Testing logged in suername");
 		loginPage.login("admin","admin123");

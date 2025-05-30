@@ -18,8 +18,8 @@ import com.orangehrm.base.BaseClass;
 import com.orangehrm.utilities.ExtentReportsManager;
 
 public class DriverActions extends BaseClass {
-	public static WebDriver driver;
-	public static WebDriverWait wait;
+	private WebDriver driver;
+	private WebDriverWait wait;
 	private static int EXPLICIT_WAIT_TIME;
 	public static final Logger logger = BaseClass.logger;
 
@@ -55,28 +55,29 @@ public class DriverActions extends BaseClass {
 			webElement.clear();
 			webElement.sendKeys(value);
 			logger.info("Entered text on " + getElementDescription(webElement) + " Value -->" + value);
-			ExtentReportsManager.logStep("Entered text on " + getElementDescription(webElement) + " Value -->" + value);
+			//ExtentReportsManager.logStep("Entered text on " + getElementDescription(webElement) + " Value -->" + value);
 		} catch (Exception e) {
 			logger.error("Unable to enter text on " + getElementDescription(webElement) +"--> Error: "+ e.getMessage());
 			applyBoarder(webElement, "red");
-			ExtentReportsManager.logStep("Unable to enter text on " + getElementDescription(webElement));
+			//ExtentReportsManager.logStep("Unable to enter text on " + getElementDescription(webElement));
 		}
 	}
 
 	// Click a webelement
 	public void clickElement(WebElement webElement) {
 		try {
+			String elementDescription = getElementDescription(webElement);
 			waitUntilClickable(webElement);
 			applyBoarder(webElement, "green");
 			webElement.click();
 
-			logger.info("Clicked the button - " + getElementDescription(webElement));
-			ExtentReportsManager.logStep("Clicked the button - " + getElementDescription(webElement));
+			logger.info("Clicked the button - " + elementDescription);
+			//ExtentReportsManager.logStep("Clicked the button - " + getElementDescription(webElement));
 		} catch (Exception e) {
 			logger.error("Unable to click element " + e.getMessage());
 			applyBoarder(webElement, "red");
 			logger.info("Unable to click the button " + getElementDescription(webElement));
-			ExtentReportsManager.logStep("Unable to click the button " + getElementDescription(webElement));
+			//ExtentReportsManager.logStep("Unable to click the button " + getElementDescription(webElement));
 		}
 	}
 
@@ -172,11 +173,13 @@ public class DriverActions extends BaseClass {
 
 		try {
 			String name = element.getDomProperty("name");
+			
 			String placeholder = element.getDomProperty("placeholder");
+			
 			String id = element.getDomProperty("id");
 			String text = element.getDomProperty("text");
 			String className = element.getDomProperty("class");
-
+			
 			if (isNotEmpty(name)) {
 				return "Element with name :" + name;
 			} else if (isNotEmpty(id)) {
